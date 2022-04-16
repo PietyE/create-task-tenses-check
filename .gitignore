@@ -1,5 +1,4 @@
 .eslintcache
-.env
 .env.test
 node_modules/
 coverage/
