@@ -12,7 +12,7 @@ interface IAnswers {
 
 export const ValidateForm = ({ keyWord }: ValidateFormProps) => {
   const [value, setValue] = useState<string>('');
-  const [showAnswer, setsSowAnswer] = useState(false);
+  const [showAnswer, setShowAnswer] = useState(false);
   const [answers, setAnswers] = useState<IAnswers>({
     attemp1: null,
     attemp2: null,
@@ -26,7 +26,7 @@ export const ValidateForm = ({ keyWord }: ValidateFormProps) => {
 
     if (value.length === keyWord.length) {
       if (value.trim().toLowerCase() === keyWord.trim().toLowerCase()) {
-        setsSowAnswer(true);
+        setShowAnswer(true);
         for (let key in answers) {
           if (answers[key] === null) {
             setAnswers(prevAnswers => {
@@ -52,8 +52,18 @@ export const ValidateForm = ({ keyWord }: ValidateFormProps) => {
   return (
     <>
       <TextField
+        sx={{
+          mr: 2,
+          width: '160px',
+          borderBottom:
+            showAnswer ||
+            (answers.attemp2 === false &&
+              answers.attemp3 === false &&
+              answers.attemp1 === false)
+              ? '2px solid #03b803'
+              : '',
+        }}
         variant="outlined"
-        sx={{ width: '150px', mr: 2 }}
         size="small"
         label="odpowiedź"
         value={
